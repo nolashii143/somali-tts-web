@@ -1,6 +1,38 @@
 # Somali TTS Web
 
-Next.js web app that connects to the [Somali-MMS-TTS](https://huggingface.co/spaces/Ayoubadanabdi/Somali-MMS-TTS) Hugging Face Space.
+Next.js dashboard for Somali text-to-speech, connected to the [Somali-MMS-TTS](https://huggingface.co/spaces/Ayoubadanabdi/Somali-MMS-TTS) Hugging Face Space.
+
+**Somali TTS model by: Engr Ayoub Adan Abdi**
+
+## Authentication (Supabase)
+
+Users sign in with **email and password**. Profiles are stored in Supabase.
+
+### Setup
+
+1. Create a free project at [supabase.com](https://supabase.com)
+2. Run `supabase/schema.sql` in the SQL Editor
+3. Copy **Project URL** and **anon public key** from Settings → API
+4. Add to `.env.local` and Vercel environment variables:
+
+```
+NEXT_PUBLIC_SUPABASE_URL=...
+NEXT_PUBLIC_SUPABASE_ANON_KEY=...
+```
+
+5. In Supabase → Authentication → Providers, enable **Email**
+6. Restart the app and visit `/auth/signup`
+
+Protected routes: `/generate`, `/history`, `/favorites`, `/profile`, `/settings`
+
+## Features
+
+- **Generate** — Convert Somali text to speech with example phrases
+- **History** — Replay, search, and manage recent generations (saved locally)
+- **Favorites** — Save phrases for quick reuse
+- **Profile** — Authenticated account with name, email, title, and bio (Supabase)
+- **Settings** — Dark mode, history toggle, data reset
+- **Dashboard UI** — Sidebar navigation, stats, mobile-friendly layout
 
 ## Local development
 
