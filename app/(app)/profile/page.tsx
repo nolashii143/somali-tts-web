@@ -1,12 +1,15 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import { useAuth } from "@/app/auth-provider";
 import { useApp } from "@/app/providers";
 import { StatCard } from "@/app/components/StatCard";
 import { formatDate } from "@/lib/format";
 
 export default function ProfilePage() {
+  const { user } = useAuth();
   const { profile, stats, updateProfile } = useApp();
   const [draft, setDraft] = useState(profile);
   const [saved, setSaved] = useState(false);
@@ -42,6 +45,19 @@ export default function ProfilePage() {
         <p className="mt-2 text-slate-600 dark:text-slate-400">
           Your profile is saved to your account when Supabase auth is enabled.
         </p>
+        {!user && (
+          <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">
+            You are browsing as a guest.{" "}
+            <Link href="/auth/login" className="font-medium text-sky-700 dark:text-sky-400">
+              Sign in
+            </Link>{" "}
+            or{" "}
+            <Link href="/auth/signup" className="font-medium text-sky-700 dark:text-sky-400">
+              create an account
+            </Link>
+            .
+          </p>
+        )}
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">

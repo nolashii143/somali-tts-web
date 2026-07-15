@@ -68,9 +68,46 @@ Returns service status.
 
 ## Deploy to Vercel
 
-1. Push this folder to GitHub
-2. Import the repo in [Vercel](https://vercel.com/new)
-3. Add environment variables (optional `HF_SPACE_ID`, `HF_TOKEN`)
-4. Deploy
+### Quick deploy (recommended)
+
+1. Log in to GitHub (once):
+
+```powershell
+gh auth login
+```
+
+2. Log in to Vercel (once):
+
+```powershell
+npx vercel login
+```
+
+3. Run the deploy script:
+
+```powershell
+cd j:\SpeechT5_API\somali-tts-web
+.\deploy.ps1
+```
+
+### Manual steps
+
+1. Push to GitHub:
+
+```powershell
+gh repo create somali-tts-web --public --source=. --remote=origin --push
+git push -u origin main
+```
+
+2. Import at [vercel.com/new](https://vercel.com/new) or run `npx vercel --prod`
+
+3. Add **Environment Variables** in Vercel → Settings:
+
+| Variable | Value |
+|----------|-------|
+| `NEXT_PUBLIC_SUPABASE_URL` | `https://cwzgbucpshnnkwujoaoi.supabase.co` |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | your Supabase anon key |
+| `HF_SPACE_ID` | `Ayoubadanabdi/Somali-MMS-TTS` |
+
+4. Redeploy after adding env vars.
 
 Note: `/api/tts` uses a 60s timeout (`vercel.json`). Vercel Pro is recommended because free Hobby functions timeout at 10s, which may be too short when the HF Space is cold.

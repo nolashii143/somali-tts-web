@@ -18,7 +18,7 @@ const NAV_ITEMS = [
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { profile, stats } = useApp();
-  const { user, signOut, configured } = useAuth();
+  const { user, signOut } = useAuth();
   const { theme, toggleTheme } = useTheme();
 
   const initials = profile.name
@@ -88,7 +88,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
               >
                 {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
               </button>
-              {configured && user && (
+              {user ? (
                 <button
                   type="button"
                   onClick={() => void signOut()}
@@ -96,6 +96,21 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 >
                   Sign out
                 </button>
+              ) : (
+                <>
+                  <Link
+                    href="/auth/login"
+                    className="rounded-xl border border-slate-200 px-3 py-2 text-sm font-medium dark:border-slate-700"
+                  >
+                    Sign in
+                  </Link>
+                  <Link
+                    href="/auth/signup"
+                    className="rounded-xl bg-sky-600 px-3 py-2 text-sm font-semibold text-white"
+                  >
+                    Sign up
+                  </Link>
+                </>
               )}
               <Link
                 href="/profile"

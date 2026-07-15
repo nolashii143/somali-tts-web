@@ -36,9 +36,14 @@ function LoginForm() {
   if (!configured) {
     return (
       <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
-        Add <code>NEXT_PUBLIC_SUPABASE_URL</code> and{" "}
-        <code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code> to <code>.env.local</code>{" "}
-        to enable authentication.
+        <p className="font-medium">Supabase is not configured on this deployment.</p>
+        <p className="mt-2">
+          In the Vercel project, add{" "}
+          <code>NEXT_PUBLIC_SUPABASE_URL</code> and{" "}
+          <code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code> under Settings →
+          Environment Variables (Production), then redeploy. For local
+          development, put the same keys in <code>.env.local</code>.
+        </p>
       </div>
     );
   }
