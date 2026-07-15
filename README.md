@@ -104,7 +104,7 @@ git push -u origin main
 
 | Variable | Value |
 |----------|-------|
-| `NEXT_PUBLIC_SUPABASE_URL` | `https://cwzgbucpshnnkwujoaoi.supabase.co` |
+| `NEXT_PUBLIC_SUPABASE_URL` | `https://cwzgbucpshnnkwujoaoi.supabase.co` (Project URL only — **do not** append `/rest/v1`) |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | your Supabase anon key |
 | `HF_SPACE_ID` | `Ayoubadanabdi/Somali-MMS-TTS` |
 

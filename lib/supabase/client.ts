@@ -1,11 +1,8 @@
 import { createBrowserClient } from "@supabase/ssr";
 
-export function getSupabaseEnv() {
-  return {
-    url: process.env.NEXT_PUBLIC_SUPABASE_URL?.trim() ?? "",
-    anonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim() ?? "",
-  };
-}
+import { getSupabaseEnv } from "@/lib/supabase/env";
+
+export { getSupabaseEnv } from "@/lib/supabase/env";
 
 export function createClient() {
   const { url, anonKey } = getSupabaseEnv();
@@ -28,12 +25,18 @@ export function formatAuthError(error: unknown): string {
   if (error instanceof TypeError && String(error.message).includes("fetch")) {
     return (
       "Cannot reach Supabase. Open your Supabase dashboard → Settings → API, " +
-      "copy the exact Project URL into .env.local as NEXT_PUBLIC_SUPABASE_URL, " +
-      "then restart npm run dev."
+      "copy the Project URL (https://xxxx.supabase.co — no /rest/v1) into " +
+      "NEXT_PUBLIC_SUPABASE_URL, then redeploy."
     );
   }
 
   if (error instanceof Error) {
+    if (/invalid path/i.test(error.message)) {
+      return (
+        "Supabase URL looks wrong. Use the Project URL only " +
+        "(https://xxxx.supabase.co), not the REST URL ending in /rest/v1."
+      );
+    }
     return error.message;
   }
 

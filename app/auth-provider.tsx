@@ -64,7 +64,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           email,
           password,
         });
-        return error?.message ?? null;
+        return error ? formatAuthError(error) : null;
       } catch (error) {
         return formatAuthError(error);
       }
@@ -88,7 +88,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             },
           },
         });
-        return error?.message ?? null;
+        return error ? formatAuthError(error) : null;
       } catch (error) {
         return formatAuthError(error);
       }
